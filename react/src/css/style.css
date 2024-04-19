@@ -1,0 +1,61 @@
+
+  .fjalla-one-regular {
+    font-family: "Fjalla One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  
+  .Nav{
+    background-color: rgb(75, 204, 138);
+    padding: 10px;
+    height: 70px;
+    display: flex;
+    align-items:center;
+  } 
+  
+  .navbar-brand{
+    color: black;
+    size: 25px;
+  }
+  
+  body{
+    background-color: rgb(1, 8, 4);
+  }
+  
+  /* ----------------------------------------Botones Login-------------------------------------------- */ 
+  
+  .iniciarSesion {
+    padding: 10px 10px; 
+    margin: 30px 10px;
+    background-color: rgb(14, 164, 114); 
+    color: white; 
+    border: none; 
+    cursor: pointer;
+    border-radius: 5px; 
+    font-size: 18px;
+    font-family: Roboto;
+    font-weight: 700;
+  }
+  
+  .iniciarSesion:hover {
+    background-color: #45a049; 
+    transform: scale(1.1);
+  }
+  
+  .iniciarSesion:visited {
+    color: #fff; /* Mantener el color del texto sin cambios */
+  }
+
+
+  /* Login puro y duro */
+  
+  .textoCuestionario{
+    margin-top: 50px;
+    color: rgb(51, 126, 45);
+    font-family: 'Fjalla One'; 
+    font-size: 50px;
+  }
+  
+  /*-----------------*/
+  
