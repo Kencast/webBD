@@ -1,23 +1,20 @@
 import Nav from "./components/Nav";
-import Carrucel from "./components/Carrucel";
+import PaginaInicio from "./page/PaginaInicio";
+import PaginaLogin from "./page/PaginaLogin";
+import { Route } from "wouter";
 
 function App() {
-  const LaCentracion = {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  };
-  const estilo = {
-    backgroundColor: "black",
-  };
   return (
-    <div style={estilo}>
+    <div className="fondo">
       <Nav />
-      <div>
-        <div style={LaCentracion}>
-          <Carrucel />
-        </div>
-      </div>
+      <Route path="/login">
+        {" "}
+        <PaginaLogin />{" "}
+      </Route>
+      <Route path="/">
+        {" "}
+        <PaginaInicio />{" "}
+      </Route>
     </div>
   );
 }
