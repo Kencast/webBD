@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "*.erl": "erlang",
+        "thread": "cpp"
+    }
+}

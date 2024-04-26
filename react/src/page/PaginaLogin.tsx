@@ -15,8 +15,28 @@ function PaginaLogin() {
       return alert("Correo incorrecto");
     if (password.length < 7)
       return alert("La contrasea debe de ser de al menos 8 caracteres");
-    //Base de datos
+    const url =
+      "https://g772354e1c5d833-odsr3pvsmmg8oiiy.adb.sa-bogota-1.oraclecloudapps.com/ords/admin/user/login/";
+    const parametros = {
+      parametro1: email,
+      parametro2: password,
+    };
+    fetch(url, {
+      method: "POST",
+      body: JSON.stringify(parametros),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        alert(data); // Aquí obtendrías el objeto JSON devuelto por el procedimiento almacenado
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   };
+
   const registrar = () => {
     if (correo.length < 5 || !correo.includes("@"))
       return alert("Correo incorrecto");
