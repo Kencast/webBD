@@ -1,4 +1,7 @@
 import { useState } from "react";
+import { post } from "../js/post";
+import { useLocation } from "wouter";
+let user;
 
 function PaginaLogin() {
   const [email, setEmail] = useState("");
@@ -9,35 +12,38 @@ function PaginaLogin() {
   const [adress, setAdress] = useState("");
   const [correo, setCorreo] = useState("");
   const [contra, setContra] = useState("");
+  const [actual, setLocation] = useLocation();
 
-  const login = () => {
+  const login = async function () {
     if (email.length < 5 || !email.includes("@"))
       return alert("Correo incorrecto");
-    if (password.length < 7)
+    if (password.length < 1)
       return alert("La contrasea debe de ser de al menos 8 caracteres");
     const url =
       "https://g772354e1c5d833-odsr3pvsmmg8oiiy.adb.sa-bogota-1.oraclecloudapps.com/ords/admin/user/login/";
     const parametros = {
-      parametro1: email,
-      parametro2: password,
+      correo: email,
+      contra: password,
     };
-    fetch(url, {
-      method: "POST",
-      body: JSON.stringify(parametros),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        alert(data); // Aquí obtendrías el objeto JSON devuelto por el procedimiento almacenado
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+    try {
+      const datos = await post(url, parametros);
+      if (datos.respuesta > 0) {
+        user = {
+          id: datos.respuesta,
+          nombre: datos.nombre,
+          apellido: datos.apellido,
+          pais: datos.pais,
+        };
+        setLocation("/principal");
+      } else {
+        alert("Correo o contraseña incorrecta");
+      }
+    } catch (error) {
+      console.log("Error en login", error);
+    }
   };
 
-  const registrar = () => {
+  const registrar = async function () {
     if (correo.length < 5 || !correo.includes("@"))
       return alert("Correo incorrecto");
     if (contra.length < 7)
@@ -46,8 +52,30 @@ function PaginaLogin() {
     if (country.length < 6) return alert("País invalido");
     if (apellido.length < 2) return alert("Apellido invalido");
     if (adress.length < 10) return alert("Direccion invalida");
-    //Validacion bases de datos
-    //meter en base de datos
+    const url =
+      "https://g772354e1c5d833-odsr3pvsmmg8oiiy.adb.sa-bogota-1.oraclecloudapps.com/ords/admin/user/registrar/";
+    const parametros = {
+      correo: correo,
+      contra: contra,
+      nombre: nombre,
+      pais: country,
+      direccion: adress,
+      apellido: apellido,
+    };
+    try {
+      const datos = await post(url, parametros);
+      if (datos.respuesta > 0) {
+        user = {
+          id: datos.respuesta,
+          nombre: nombre,
+          apellido: apellido,
+          pais: country,
+        };
+        setLocation("/principal");
+      } else alert("El correo ya esta ocupado");
+    } catch (error) {
+      console.log("Error en login", error);
+    }
   };
   return (
     <div className="centrarVert">
@@ -60,7 +88,7 @@ function PaginaLogin() {
             <div className="flip-card__inner">
               <div className="flip-card__front">
                 <div className="title">Iniciar sesión</div>
-                <form action="" className="flip-card__form">
+                <form action="" method="post" className="flip-card__form">
                   <input
                     type="email"
                     placeholder="Correo"
@@ -79,14 +107,18 @@ function PaginaLogin() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />
-                  <button className="flip-card__btn" onClick={login}>
+                  <button
+                    type="button"
+                    className="flip-card__btn"
+                    onClick={login}
+                  >
                     Empecemos!
                   </button>
                 </form>
               </div>
               <div className="flip-card__back">
                 <div className="title">Registrarse</div>
-                <form action="" className="flip-card__form">
+                <form action="" method="post" className="flip-card__form">
                   <input
                     type="name"
                     placeholder="Nombre"
@@ -137,7 +169,11 @@ function PaginaLogin() {
                     value={contra}
                     onChange={(e) => setContra(e.target.value)}
                   />
-                  <button className="flip-card__btn" onClick={registrar}>
+                  <button
+                    type="button"
+                    className="flip-card__btn"
+                    onClick={registrar}
+                  >
                     Confirmar!
                   </button>
                 </form>
@@ -149,5 +185,5 @@ function PaginaLogin() {
     </div>
   );
 }
-
+export { user };
 export default PaginaLogin;
