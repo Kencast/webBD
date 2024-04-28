@@ -3,7 +3,11 @@ import { post } from "../js/post";
 import { useLocation } from "wouter";
 let user;
 
-function PaginaLogin() {
+interface props {
+  handle: any;
+}
+
+function PaginaLogin({ handle }: props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [nombre, setNombre] = useState("");
@@ -34,6 +38,7 @@ function PaginaLogin() {
           apellido: datos.apellido,
           pais: datos.pais,
         };
+        handle();
         setLocation("/principal");
       } else {
         alert("Correo o contraseña incorrecta");
@@ -71,6 +76,7 @@ function PaginaLogin() {
           apellido: apellido,
           pais: country,
         };
+        handle();
         setLocation("/principal");
       } else alert("El correo ya esta ocupado");
     } catch (error) {

@@ -1,12 +1,16 @@
-function Nav() {
+import FilaBotones from "./FilaBotones";
+
+interface props {
+  mostrar: boolean;
+}
+
+function Nav({ mostrar }: props) {
   const myColor = {
     backgroundColor: "rgb(75, 204, 138)",
     padding: "10px",
-    //height: "70px",
     display: "flex",
     alignItems: "center",
   };
-
   return (
     <nav className="navbar bg-body-tertiary">
       <div className="container-fluid" style={myColor}>
@@ -20,6 +24,7 @@ function Nav() {
           />
           Nature
         </a>
+        {mostrar && <FilaBotones />}
       </div>
     </nav>
   );

@@ -80,4 +80,38 @@
   margin-bottom: 5%;
 }
 
-/* ------------------------------ */
+/* ----------Grupo Botones-------------------- */
+
+.botonNav {
+  width: 8rem;
+  height: 3.1rem;
+  padding: 5px 5px;
+  margin: 3px 5px;
+  background-color: rgb(14, 164, 114);
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 13px;
+  font-family: Roboto;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.botonNav:hover {
+  background-color: #45a049;
+  transform: scale(1.1);
+}
+
+/* ------------Observaciones----------- */
+.obse {
+  margin-top: 1rem;
+}
+
+/* ---------Agregar obs---- */
+.text2 {
+  margin-top: 3%;
+  color: rgb(255, 255, 255);
+  font-family: "Fjalla One"; /* Utilizar Roboto como primera opción */
+  font-style: italic; /* Aplicar estilo cursiva */
+}

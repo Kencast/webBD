@@ -1,17 +1,21 @@
+import { useLocation } from "wouter";
+
 interface props {
+  id: number;
   imagen: string;
   taxon: string;
   usuario: string;
   fecha: string;
 }
 
-function Carta({ imagen, taxon, usuario, fecha }: props) {
+function Carta({ id, imagen, taxon, usuario, fecha }: props) {
+  const [actual, setLocation] = useLocation();
   return (
     <div className="card">
-      <div className="card-image">
-        <img src={imagen} />
-      </div>
-      <div className="category"> {taxon}</div>
+      <img className="card-image" src={imagen} />
+      <a className="category" onClick={() => setLocation("/" + id)}>
+        {taxon}
+      </a>
       <div className="heading">
         <div className="author">
           By <span className="name">{usuario}</span> {fecha}
