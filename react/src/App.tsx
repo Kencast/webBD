@@ -7,8 +7,10 @@ import PaginaPerfil from "./page/PaginaPerfil";
 import PaginaInformacion from "./page/PaginaInformacion";
 import PaginaMisObservaciones from "./page/PaginaMisObservaciones";
 import PaginaAgregarIde from "./page/PaginaAgregarIde";
+import PaginaActualizarObs from "./page/PaginaActualizarObs";
 import { useState } from "react";
 import { Router, Route, Switch } from "wouter";
+import Cargar from "./components/Cargar";
 
 function App() {
   const [mostrarOpciones, setOpciones] = useState(false);
@@ -21,7 +23,7 @@ function App() {
   return (
     <div className="fondo">
       <Nav mostrar={mostrarOpciones} />
-      <Router base="/app">
+      <Router>
         <Switch>
           <Route path="/login">
             {" "}
@@ -30,6 +32,9 @@ function App() {
           <Route path="/principal" nest>
             {" "}
             <Switch>
+              <Route path="/actualizarObservacion/:id">
+                {(p) => <PaginaActualizarObs id={p.id} />}
+              </Route>
               <Route path="/agregarIdentificacion/:id">
                 {(pa) => <PaginaAgregarIde id={pa.id} />}
               </Route>

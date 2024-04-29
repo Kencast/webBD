@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import {getDownloadURL, getStorage, ref, uploadBytes} from 'firebase/storage';
+import {getDownloadURL, getStorage, ref, uploadBytes, deleteObject} from 'firebase/storage';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -26,5 +26,17 @@ export async function subirArchivo(file: any, url:string) : Promise<string>{
   catch (error){
     console.log('Error al subir imagen', error);
     return 'null';
+  }
+}
+
+export async function eliminarArchivo(url:string) {
+  const imageRef = ref(storage, url);
+  try{
+      const borrar= await deleteObject(imageRef)
+      return true;   
+    }
+  catch (error){
+    console.log('Error al subir imagen', error);
+    return false;
   }
 }

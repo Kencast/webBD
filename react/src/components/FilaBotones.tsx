@@ -6,19 +6,19 @@ function FilaBotones() {
       <Boton
         clase="botonNav"
         texto="Observaciones"
-        ruta="/app/principal/observaciones"
+        ruta="/principal/observaciones"
       />
       <Boton
         clase="botonNav"
         texto="Mis observaciones"
-        ruta="/app/principal/misObservaciones"
+        ruta="/principal/misObservaciones"
       />
       <Boton
         clase="botonNav"
         texto="Agregar Observacion"
-        ruta="/app/principal/agregarObservacion"
+        ruta="/principal/agregarObservacion"
       />
-      <Boton clase="botonNav" texto="Mi perfil" ruta="/app/principal/perfil" />
+      <Boton clase="botonNav" texto="Mi perfil" ruta="/principal/perfil" />
     </div>
   );
 }

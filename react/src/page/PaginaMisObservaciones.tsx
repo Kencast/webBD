@@ -3,6 +3,7 @@ import Carta from "../components/Carta";
 import Columna from "../components/Columna";
 import { getData } from "../js/get";
 import { user } from "./PaginaLogin";
+import Cargar from "../components/Cargar";
 
 interface Dato {
   id: number;
@@ -14,14 +15,19 @@ interface Dato {
 
 function PaginaMisObservaciones() {
   const [observations, setObservation] = useState([]);
-
+  const [load, setLoad] = useState(true);
   useEffect(function () {
     getData(
       "https://g772354e1c5d833-odsr3pvsmmg8oiiy.adb.sa-bogota-1.oraclecloudapps.com/ords/admin/observaciones/mis/" +
         user.id
-    ).then((datos) => setObservation(datos));
+    ).then((datos) => {
+      setObservation(datos);
+      if (datos.length > 0) setLoad(false);
+    });
   }, []);
-  return (
+  return load ? (
+    <Cargar />
+  ) : (
     <div className="laCentracion obse">
       <div className="container text-center">
         <div className="row justify-content-start align-items-start">

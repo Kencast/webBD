@@ -8,7 +8,7 @@ interface props {
   id: string;
 }
 
-function PaginaActualizarObs() {
+function PaginaActualizarObs({ id }: props) {
   const [taxon, setTaxon] = useState("");
   const [isVisible, setIsVisible] = useState(false);
   const [actual, setLocation] = useLocation();
@@ -18,17 +18,24 @@ function PaginaActualizarObs() {
   };
 
   const agregar = async () => {
-    if (taxon.length < 4) return alert("Taxon invalido");
-    if (comentario.length < 10) return alert("Comentario muy corto");
+    if (taxon == "" && comentario == "")
+      return alert("Complete el campo que desea actualizar");
+    if (taxon != "" && taxon.length < 4) return alert("Taxon invalido");
+    if (comentario.length < 10 && comentario != "")
+      return alert("Comentario muy corto");
     const parametros = {
-      taxon: taxon.toLowerCase(),
-      comentario: comentario,
+      id: id,
+      taxon: taxon == "" ? "null" : taxon.toLowerCase(),
+      comentario: comentario == "" ? "null" : comentario,
     };
     try {
       const datos = await post(
-        "https://g772354e1c5d833-odsr3pvsmmg8oiiy.adb.sa-bogota-1.oraclecloudapps.com/ords/admin/identificacion/agregar",
+        "https://g772354e1c5d833-odsr3pvsmmg8oiiy.adb.sa-bogota-1.oraclecloudapps.com/ords/admin/observaciones/actualizar",
         parametros
       );
+      if (datos.respuesta > 0) setIsVisible(true);
+      else if (datos.respuesta == -1) return alert("El taxon no existe");
+      else return alert("Error al actualizar");
     } catch (error) {
       console.log("Error al actualizar la observacion: ", error);
     }
@@ -47,7 +54,7 @@ function PaginaActualizarObs() {
       )}
       {!isVisible && (
         <div className="centrarVert">
-          <h1 className="text2">Agregue la informacion que desea actualizar</h1>
+          <h1 className="text2">Agregue la información que desea actualizar</h1>
           <div className="form-container obse">
             <form className="form">
               <CampoTexto

@@ -9,6 +9,8 @@ import "leaflet/dist/leaflet.css";
 import Mensaje from "../components/Mensaje";
 import { useLocation } from "wouter";
 import { post } from "../js/post";
+import { eliminarArchivo } from "../js";
+import Cargar from "../components/Cargar";
 
 interface props {
   id: string;
@@ -24,9 +26,11 @@ interface obse {
   latitud: number;
   longitud: number;
   rutaimagen: string;
+  comentario: string;
 }
 
 interface identi {
+  id: number;
   usuario: string;
   taxon: string;
   fecha: string;
@@ -45,6 +49,7 @@ function PaginaInformacion({ id }: props) {
     latitud: 0,
     longitud: 0,
     rutaimagen: "null",
+    comentario: "null",
   });
   const [identificaciones, setIdenficaciones] = useState([]);
   const taxonomia = ["", "", "", "", "", "", "", ""];
@@ -68,19 +73,22 @@ function PaginaInformacion({ id }: props) {
         "https://g772354e1c5d833-odsr3pvsmmg8oiiy.adb.sa-bogota-1.oraclecloudapps.com/ords/admin/observaciones/borrar",
         param
       );
-      if (datos.respuesta > 0) setVisible(true);
-      else return alert("Error al eliminar la observacion");
+      if (datos.respuesta > 0) {
+        const res = await eliminarArchivo(observacion.rutaimagen);
+        if (!res) return alert("No se pudo eliminar la imagen");
+        setVisible(true);
+      } else return alert("Error al eliminar la observacion");
     } catch (error) {
       console.log("Error al intentar borrar: ", error);
     }
   };
 
   const redirigir = () => {
-    setLocation(`/${observacion.observacionid}`);
+    setLocation(`/misObservaciones`);
   };
 
   const handle2 = () => {
-    setLocation("");
+    setLocation(`/actualizarObservacion/${observacion.observacionid}`);
   };
 
   useEffect(function () {
@@ -89,10 +97,8 @@ function PaginaInformacion({ id }: props) {
         "https://g772354e1c5d833-odsr3pvsmmg8oiiy.adb.sa-bogota-1.oraclecloudapps.com/ords/admin/observaciones/getInfo/" +
           id
       ).then((datos) => {
-        console.log(datos[0]);
         format(datos[0].taxonomia);
         datos[0].taxonomia = taxonomia;
-        console.log(observacion);
         if (datos[0].nombrecomun != null) taxonomia[7] = datos[0].nombrecomun;
         setObservacion(datos[0]);
       });
@@ -117,7 +123,7 @@ function PaginaInformacion({ id }: props) {
           ruta2="/observaciones"
         />
       )}
-      {!visible && observacion.rutaimagen == "null" && <h1>Cargando...</h1>}
+      {!visible && observacion.rutaimagen == "null" && <Cargar />}
       {!visible && observacion.rutaimagen != "null" && (
         <div className="containerI">
           <div className="cardP box">
@@ -134,6 +140,7 @@ function PaginaInformacion({ id }: props) {
               <p className="profileP">{`Nombre comun: ${observacion.taxonomia[7]}`}</p>
               <p className="profileP">{`Fecha: ${observacion.fecha}`}</p>
               <p className="profileP">{`Usuario: ${observacion.usuarionombre}`}</p>
+              <p className="profileP">{`Comentario: ${observacion.comentario}`}</p>
               <MapContainer
                 center={[observacion.latitud, observacion.longitud]}
                 zoom={9}
@@ -172,7 +179,7 @@ function PaginaInformacion({ id }: props) {
           <div className="row box">
             {identificaciones.map((obj: identi) => {
               return (
-                <div className="col-13">
+                <div className="col-13" key={obj.id}>
                   <Comentario
                     usuario={obj.usuario}
                     fecha={obj.fecha}
