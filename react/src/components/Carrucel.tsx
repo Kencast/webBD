@@ -19,22 +19,22 @@ function Carrucel() {
       </ol>
       <div className="carousel-inner">
         <ItemCarru
-          rutaIma="./src/assets/animal1.png"
+          rutaIma="https://firebasestorage.googleapis.com/v0/b/nature-d45bb.appspot.com/o/assets%2Fanimal1.png?alt=media&token=43d304c1-842a-4571-8fa4-3908ae9a7971"
           texto="Vanessa vulcania"
           act="active"
         />
         <ItemCarru
-          rutaIma="./src/assets/animal2.png"
+          rutaIma="https://firebasestorage.googleapis.com/v0/b/nature-d45bb.appspot.com/o/assets%2Fanimal2.png?alt=media&token=ac796742-8763-47b6-9e9f-093196c1905f"
           texto="Sagittarius serpentarius"
           act=""
         />
         <ItemCarru
-          rutaIma="./src/assets/animal3.png"
+          rutaIma="https://firebasestorage.googleapis.com/v0/b/nature-d45bb.appspot.com/o/assets%2Fanimal3.png?alt=media&token=abe1e42d-a29b-44ba-ac33-c8815ad0c055"
           texto="Lynx Lynx"
           act=""
         />
         <ItemCarru
-          rutaIma="./src/assets/animal4.png"
+          rutaIma="https://firebasestorage.googleapis.com/v0/b/nature-d45bb.appspot.com/o/assets%2Fanimal4.png?alt=media&token=c20dd5ff-3042-4cd5-b129-8d7a213b9575"
           texto="Mobula birostris"
           act=""
         />

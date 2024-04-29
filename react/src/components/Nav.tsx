@@ -16,7 +16,7 @@ function Nav({ mostrar }: props) {
       <div className="container-fluid" style={myColor}>
         <a className="navbar-brand" href="#">
           <img
-            src="./src/assets/logo.png"
+            src="https://firebasestorage.googleapis.com/v0/b/nature-d45bb.appspot.com/o/assets%2Flogo.png?alt=media&token=430769a6-48f1-4eb3-8aa1-b1258d71173a"
             alt="Logo"
             width="30"
             height="30"
