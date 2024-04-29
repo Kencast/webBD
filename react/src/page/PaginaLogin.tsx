@@ -68,7 +68,7 @@ function PaginaLogin({ handle }: props) {
     if (contra.length < 7)
       return alert("La contrasea debe de ser de al menos 8 caracteres");
     if (nombre.length < 2) return alert("Nombre invalido");
-    if (country.length < 6) return alert("País invalido");
+    if (country.length < 4) return alert("País invalido");
     if (apellido.length < 2) return alert("Apellido invalido");
     if (adress.length < 10) return alert("Direccion invalida");
     const url =
