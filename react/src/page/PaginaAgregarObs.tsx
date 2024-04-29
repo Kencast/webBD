@@ -101,7 +101,7 @@ function PaginaAgregarObs() {
         <Mensaje
           titulo="Listo"
           mensaje="Se agrego la observacion con exito"
-          ruta2="/app/principal/observaciones"
+          ruta2="/observaciones"
           textAr="Agregar otra observacion"
           fun={isNotVisible}
           textAb="Regresar a la pagina principal"

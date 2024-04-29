@@ -98,8 +98,8 @@ function PaginaInformacion({ id }: props) {
           id
       ).then((datos) => {
         format(datos[0].taxonomia);
-        datos[0].taxonomia = taxonomia;
         if (datos[0].nombrecomun != null) taxonomia[7] = datos[0].nombrecomun;
+        datos[0].taxonomia = taxonomia;
         setObservacion(datos[0]);
       });
       getData(
