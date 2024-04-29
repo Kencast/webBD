@@ -1,7 +1,12 @@
 import CampoTexto from "../components/CampoTexto";
 import { useState, useEffect } from "react";
 import { MapContainer, Marker, TileLayer, useMapEvents } from "react-leaflet";
-import { Icon, LeafletMouseEvent } from "leaflet";
+import {
+  Icon,
+  LatLngExpression,
+  LatLngTuple,
+  LeafletMouseEvent,
+} from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { subirArchivo } from "../js";
 import { v4 } from "uuid";
@@ -28,7 +33,7 @@ function PaginaAgregarObs() {
   const [fecha, setFecha] = useState("");
   const [comentario, setComentario] = useState("");
   const [dueno, setDueno] = useState("");
-  const [pos, setPosition] = useState([48.8, 2.3]);
+  const [pos, setPosition] = useState<LatLngTuple>([48.8, 2.3]);
   const [image, setImage] = useState(null);
   const [actual, setLocation] = useLocation();
   const [isVisible, setIsVisible] = useState(false);

@@ -2,7 +2,18 @@ import { useState } from "react";
 import { post } from "../js/post";
 import { useLocation } from "wouter";
 import { getFetch } from "../js/get";
-let user;
+
+interface user {
+  id: number;
+  nombre: string;
+  apellido: string;
+  pais: string;
+  correo: string;
+  direccion: string;
+  foto: string;
+}
+
+let user: user;
 
 interface props {
   handle: any;
