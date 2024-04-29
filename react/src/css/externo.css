@@ -559,7 +559,7 @@
 .cardCo {
   width: 103rem;
   max-width: 310px;
-  height: 70px;
+  height: 100px;
   background: #353535;
   border-radius: 20px;
   display: flex;
