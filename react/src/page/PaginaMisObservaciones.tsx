@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Carta from "../components/Carta";
 import Columna from "../components/Columna";
 import { getData } from "../js/get";
+import { user } from "./PaginaLogin";
 
 interface Dato {
   id: number;
@@ -11,15 +12,15 @@ interface Dato {
   fecha: string;
 }
 
-function PaginaObservaciones() {
+function PaginaMisObservaciones() {
   const [observations, setObservation] = useState([]);
 
   useEffect(function () {
     getData(
-      "https://g772354e1c5d833-odsr3pvsmmg8oiiy.adb.sa-bogota-1.oraclecloudapps.com/ords/admin/observaciones/getAll/"
+      "https://g772354e1c5d833-odsr3pvsmmg8oiiy.adb.sa-bogota-1.oraclecloudapps.com/ords/admin/observaciones/mis/" +
+        user.id
     ).then((datos) => setObservation(datos));
   }, []);
-
   return (
     <div className="laCentracion obse">
       <div className="container text-center">
@@ -45,4 +46,4 @@ function PaginaObservaciones() {
     </div>
   );
 }
-export default PaginaObservaciones;
+export default PaginaMisObservaciones;

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { post } from "../js/post";
 import { useLocation } from "wouter";
+import { getFetch } from "../js/get";
 let user;
 
 interface props {
@@ -31,18 +32,20 @@ function PaginaLogin({ handle }: props) {
     };
     try {
       const datos = await post(url, parametros);
-      if (datos.respuesta > 0) {
-        user = {
-          id: datos.respuesta,
-          nombre: datos.nombre,
-          apellido: datos.apellido,
-          pais: datos.pais,
-        };
-        handle();
-        setLocation("/principal");
-      } else {
-        alert("Correo o contraseña incorrecta");
-      }
+      if (datos.respuesta <= 0) return alert("Correo o contraseña incorrecta");
+      const perfil = await getFetch("https://randomuser.me/api/");
+      console.log(perfil);
+      user = {
+        id: datos.respuesta,
+        nombre: datos.nombre,
+        apellido: datos.apellido,
+        pais: datos.pais,
+        correo: email,
+        direccion: datos.direccion,
+        foto: perfil.results[0].picture.large,
+      };
+      handle();
+      setLocation("/principal/observaciones");
     } catch (error) {
       console.log("Error en login", error);
     }
@@ -69,16 +72,19 @@ function PaginaLogin({ handle }: props) {
     };
     try {
       const datos = await post(url, parametros);
-      if (datos.respuesta > 0) {
-        user = {
-          id: datos.respuesta,
-          nombre: nombre,
-          apellido: apellido,
-          pais: country,
-        };
-        handle();
-        setLocation("/principal");
-      } else alert("El correo ya esta ocupado");
+      if (datos.respuesta < 0) return alert("El correo ya está ocupado");
+      const perfil = await getFetch("https://randomuser.me/api/");
+      user = {
+        id: datos.respuesta,
+        nombre: nombre,
+        apellido: apellido,
+        pais: country,
+        correo: correo,
+        direccion: adress,
+        foto: perfil.results[0].picture.large,
+      };
+      handle();
+      setLocation("/principal/observaciones");
     } catch (error) {
       console.log("Error en login", error);
     }

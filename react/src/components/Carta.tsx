@@ -13,7 +13,7 @@ function Carta({ id, imagen, taxon, usuario, fecha }: props) {
   return (
     <div className="card">
       <img className="card-image" src={imagen} />
-      <a className="category" onClick={() => setLocation("/" + id)}>
+      <a className="category" onClick={() => setLocation(`/informacion/${id}`)}>
         {taxon}
       </a>
       <div className="heading">

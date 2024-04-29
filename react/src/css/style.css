@@ -11,7 +11,7 @@
 
 .fondo {
   background-color: black;
-  min-height: 100vh;
+  min-height: 42rem;
 }
 
 .laCentracion {
@@ -114,4 +114,46 @@
   color: rgb(255, 255, 255);
   font-family: "Fjalla One"; /* Utilizar Roboto como primera opción */
   font-style: italic; /* Aplicar estilo cursiva */
+}
+
+/* CartaM */
+.mensajeA {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* position: fixed; */
+  margin-top: 5rem;
+  z-index: 100;
+  min-width: 100%;
+  min-height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(8px);
+}
+
+/* Informacion */
+
+.containerI {
+  display: flex;
+  min-height: 60rem;
+}
+
+.box {
+  padding: 20px;
+  box-sizing: border-box; /* Incluye el padding en el tamaño total */
+}
+
+.box:first-child {
+  width: 70%;
+  margin-right: 3rem; /* Espacio entre las cajas */
+}
+
+.box:last-child {
+  width: 25%;
+}
+
+.imaInf {
+  margin-top: 20px;
+  width: 270px;
+  height: 270px;
+  box-shadow: 5px 10px 20px rgba(0, 0, 0, 0.329);
 }
